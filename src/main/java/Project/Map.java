@@ -72,6 +72,61 @@ public class Map extends JPanel {
         repaint();
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        render(g);
+    }
+
+    private void render(Graphics g) {
+        if (!isInitialized) return;
+
+        panelWidth = getWidth();
+        panelHeight = getHeight();
+        cellHeight = panelHeight / 3;
+        cellWidth = panelWidth / 3;
+
+        setBackground(Color.black);
+        g.setColor(Color.white);
+
+        for(int h = 0; h < 3; h++) {
+            int y = h * cellHeight;
+            g.drawLine(0, y, panelWidth, y);
+        }
+
+        for(int w = 0; w < 3; w++) {
+            int x = w * cellWidth;
+            g.drawLine(x, 0, x, panelHeight);
+        }
+
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (field[y][x] == EMPTY_DOT) continue;
+
+                if (field[y][x] == HUMAN_DOT) {
+                    g.setColor(Color.green);
+
+                    g.fillOval(x * cellWidth + DOT_PADDING,
+                            y * cellHeight + DOT_PADDING,
+                            cellWidth - DOT_PADDING * 2,
+                            cellHeight - DOT_PADDING * 2);
+                } else if (field[y][x] == AI_DOT) {
+                    g.setColor(Color.blue);
+
+                    g.fillOval(x * cellWidth + DOT_PADDING,
+                            y * cellHeight + DOT_PADDING,
+                            cellWidth - DOT_PADDING * 2,
+                            cellHeight - DOT_PADDING * 2);
+                } else {
+                    throw new RuntimeException("Unexpected value " + field[y][x] +
+                            " in cell x = " + x + " in cell y = " + y);
+                }
+            }
+        }
+
+        if (isGameOver) showMessageGameOver(g);
+    }
+
     private void initMap() {
         fieldSizeY = 3;
         fieldSizeX = 3;
