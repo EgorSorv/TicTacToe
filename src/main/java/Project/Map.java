@@ -70,4 +70,15 @@ public class Map extends JPanel {
     private boolean isEmptyCell(int x, int y) {
         return field[y][x] == EMPTY_DOT;
     }
+
+    private void aiTurn() {
+        int x, y;
+
+        do {
+            x = RANDOM.nextInt(fieldSizeX);
+            y = RANDOM.nextInt(fieldSizeY);
+        } while (!isEmptyCell(x, y));
+
+        field[y][x] = AI_DOT;
+    }
 }
