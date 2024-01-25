@@ -63,6 +63,24 @@ public class Map extends JPanel {
         if (checkEndGame(AI_DOT, STATE_WIN_AI)) return;
     }
 
+    private boolean checkEndGame(int dot, int gameOverType) {
+        if (checkWin((char) dot)) {
+            this.gameOverType = gameOverType;
+            isGameOver = true;
+            repaint();
+            return true;
+        }
+
+        if (isMapFull()) {
+            this.gameOverType = STATE_DRAW;
+            isGameOver = true;
+            repaint();
+            return true;
+        }
+
+        return false;
+    }
+
     void startNewGame(int mode, int fSzX, int fSzY, int wLen) {
         System.out.printf("Mode: %d; \nSize: x = %d, y = %d; \nWin length: %d\n", mode, fSzX, fSzY, wLen);
 
