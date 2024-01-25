@@ -1,8 +1,6 @@
 package Project;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingsWindow extends JFrame {
     private static final int WINDOW_HEIGHT = 230;
@@ -14,12 +12,7 @@ public class SettingsWindow extends JFrame {
         setLocationRelativeTo(gameWindow);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        btnStart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
+        btnStart.addActionListener(e -> setVisible(false));
 
         add(btnStart);
     }
