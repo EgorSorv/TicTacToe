@@ -63,6 +63,18 @@ public class Map extends JPanel {
         if (checkEndGame(AI_DOT, STATE_WIN_AI)) return;
     }
 
+    private void initMap() {
+        fieldSizeY = 3;
+        fieldSizeX = 3;
+        field = new char[fieldSizeY][fieldSizeX];
+
+        for (int i = 0; i < fieldSizeY; i++) {
+            for (int j = 0; j < fieldSizeX; j++) {
+                field[i][j] = EMPTY_DOT;
+            }
+        }
+    }
+
     private boolean isValidCell(int x, int y) {
         return x >= 0 && x < fieldSizeX && y >=0 && y < fieldSizeY;
     }
