@@ -2,8 +2,6 @@ package Project;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GameWindow extends JFrame {
     private static final int WINDOW_HEIGHT = 555;
@@ -14,6 +12,8 @@ public class GameWindow extends JFrame {
     JButton btnStart = new JButton("New Game");
     JButton btnExit = new JButton("Exit");
 
+    SettingsWindow settings;
+
     GameWindow() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(WINDOW_POSX, WINDOW_POSY);
@@ -21,19 +21,11 @@ public class GameWindow extends JFrame {
         setTitle("TicTacToe");
         setResizable(false);
 
-        btnExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        settings = new SettingsWindow(this);
 
-        btnStart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnExit.addActionListener(e -> System.exit(0));
 
-            }
-        });
+        btnStart.addActionListener(e -> settings.setVisible(true));
 
         JPanel panBottom = new JPanel(new GridLayout(1, 2));
         panBottom.add(btnStart);
