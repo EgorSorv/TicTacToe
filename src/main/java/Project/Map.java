@@ -205,4 +205,14 @@ public class Map extends JPanel {
 
         return false;
     }
+
+    private boolean isMapFull() {
+        for (int i = 0; i < fieldSizeY; i++) {
+            for (int j = 0; j < fieldSizeX; j++) {
+                if (field[i][j] == EMPTY_DOT) return false;
+            }
+        }
+
+        return true;
+    }
 }
