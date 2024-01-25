@@ -127,6 +127,21 @@ public class Map extends JPanel {
         if (isGameOver) showMessageGameOver(g);
     }
 
+    private void showMessageGameOver(Graphics g) {
+        g.setColor(Color.darkGray);
+        g.fillRect(0, 200, getWidth(), 70);
+
+        g.setColor(Color.yellow);
+        g.setFont(new Font("Times new roman", Font.BOLD, 48));
+
+        switch (gameOverType) {
+            case STATE_DRAW -> g.drawString(MSG_DRAW, 180, getHeight() / 2);
+            case STATE_WIN_AI -> g.drawString(MSG_WIN_AI, 20, getHeight() / 2);
+            case STATE_WIN_HUMAN -> g.drawString(MSG_WIN_HUMAN, 70, getHeight() / 2);
+            default -> throw new RuntimeException("Unexpected gameOver state: " + gameOverType);
+        }
+    }
+
     private void initMap() {
         fieldSizeY = 3;
         fieldSizeX = 3;
