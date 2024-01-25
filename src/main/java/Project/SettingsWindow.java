@@ -12,7 +12,10 @@ public class SettingsWindow extends JFrame {
         setLocationRelativeTo(gameWindow);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        btnStart.addActionListener(e -> setVisible(false));
+        btnStart.addActionListener(e -> {
+            gameWindow.startNewGame(0, 3, 3, 3);
+            setVisible(false);
+        });
 
         add(btnStart);
     }

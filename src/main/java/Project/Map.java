@@ -63,6 +63,15 @@ public class Map extends JPanel {
         if (checkEndGame(AI_DOT, STATE_WIN_AI)) return;
     }
 
+    void startNewGame(int mode, int fSzX, int fSzY, int wLen) {
+        System.out.printf("Mode: %d; \nSize: x = %d, y = %d; \nWin length: %d\n", mode, fSzX, fSzY, wLen);
+
+        initMap();
+        isGameOver = false;
+        isInitialized = true;
+        repaint();
+    }
+
     private void initMap() {
         fieldSizeY = 3;
         fieldSizeX = 3;
