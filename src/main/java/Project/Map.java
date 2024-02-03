@@ -33,6 +33,7 @@ public class Map extends JPanel {
     private boolean isGameOver;
     private boolean isInitialized;
 
+    # Объявление поля
     Map() {
         addMouseListener(new MouseAdapter() {
             @Override
@@ -44,6 +45,7 @@ public class Map extends JPanel {
         isInitialized = false;
     }
 
+    # Обновление состояния игры
     private void update(MouseEvent e) {
         if (isGameOver || !isInitialized) return;
 
@@ -63,6 +65,7 @@ public class Map extends JPanel {
         if (checkEndGame(AI_DOT, STATE_WIN_AI)) return;
     }
 
+    # Проверка на завершение игры
     private boolean checkEndGame(int dot, int gameOverType) {
         if (checkWin((char) dot)) {
             this.gameOverType = gameOverType;
@@ -81,6 +84,7 @@ public class Map extends JPanel {
         return false;
     }
 
+    # Начало игры
     void startNewGame(int mode, int fSzX, int fSzY, int wLen) {
         System.out.printf("Mode: %d; \nSize: x = %d, y = %d; \nWin length: %d\n", mode, fSzX, fSzY, wLen);
 
@@ -96,6 +100,7 @@ public class Map extends JPanel {
         render(g);
     }
 
+    # Отрисовка поля
     private void render(Graphics g) {
         if (!isInitialized) return;
 
@@ -145,6 +150,7 @@ public class Map extends JPanel {
         if (isGameOver) showMessageGameOver(g);
     }
 
+    # Сообщение о завершении игры
     private void showMessageGameOver(Graphics g) {
         g.setColor(Color.darkGray);
         g.fillRect(0, 200, getWidth(), 70);
@@ -152,6 +158,7 @@ public class Map extends JPanel {
         g.setColor(Color.yellow);
         g.setFont(new Font("Times new roman", Font.BOLD, 48));
 
+        # Проверка статуса завершения игры
         switch (gameOverType) {
             case STATE_DRAW -> g.drawString(MSG_DRAW, 180, getHeight() / 2);
             case STATE_WIN_AI -> g.drawString(MSG_WIN_AI, 20, getHeight() / 2);
@@ -160,6 +167,7 @@ public class Map extends JPanel {
         }
     }
 
+    # Создание поля
     private void initMap() {
         fieldSizeY = 3;
         fieldSizeX = 3;
@@ -172,14 +180,17 @@ public class Map extends JPanel {
         }
     }
 
+    # Проверка на внесение символа в игровую клетку поля
     private boolean isValidCell(int x, int y) {
         return x >= 0 && x < fieldSizeX && y >=0 && y < fieldSizeY;
     }
 
+    # Проверка клетки поля на наличие внесенного символа
     private boolean isEmptyCell(int x, int y) {
         return field[y][x] == EMPTY_DOT;
     }
 
+    # Ход ИИ
     private void aiTurn() {
         int x, y;
 
@@ -191,6 +202,7 @@ public class Map extends JPanel {
         field[y][x] = AI_DOT;
     }
 
+    # Выигрышные комбинации
     private boolean checkWin(char c) {
         if (field[0][0] == c && field[0][1] == c && field[0][2] == c) return true;
         if (field[1][0] == c && field[1][1] == c && field[1][2] == c) return true;
@@ -206,6 +218,7 @@ public class Map extends JPanel {
         return false;
     }
 
+    # Проверка на заполнение всех клеток поля
     private boolean isMapFull() {
         for (int i = 0; i < fieldSizeY; i++) {
             for (int j = 0; j < fieldSizeX; j++) {
